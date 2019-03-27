@@ -25,8 +25,17 @@ Então('o serviço retorna {string}') do |mensagem|
   expect(@negado.parsed_response['mensagem']).to eq(mensagem)
 end
 
-Então('o serviço retorna o empréstimo') do
-  expect(@response_sucesso.parsed_response['id']).to eq(123)
+Então("o serviço retorna o empréstimo:") do |table|
+  @esperado = table.rows_hash
+  puts @response_sucesso
+  exp_id = @response_sucesso.parsed_response['id'].to_s
+  expect(exp_id).to eq(@esperado[:id])
+  expect(@response_sucesso.parsed_response['nome']).to eq(@esperado[:nome])
+  expect(@response_sucesso.parsed_response['cpf']).to eq(@esperado[:cpf])
+  expect(@response_sucesso.parsed_response['vl_emprestimo']).to eq(@esperado[:vl_emprestimo])
+  expect(@response_sucesso.parsed_response['nr_parcelas']).to eq(@esperado[:nr_parcelas])
+  expect(@response_sucesso.parsed_response['vl_parcelas']).to eq(@esperado[:vl_parcelas])
+  puts @response_sucesso
 end
 
 Dado('que o client tem um empréstimo criado') do
@@ -40,7 +49,7 @@ Quando('o client consultar o serviço de empréstimo informando o ID do emprést
   @result = @sucesso.get_emprestimo(@id)
 end
 
-Então('o serviço deve me retornar as informações do empréstimo criado:') do |table|
+Então('o serviço deve me retornar as informações do empréstimo buscado:') do |table|
   @retorno_get = table.rows_hash
   exp_id_emprestimo = @result.parsed_response['idEmprestimo'].to_s
   exp_status = @result.parsed_response['status']
