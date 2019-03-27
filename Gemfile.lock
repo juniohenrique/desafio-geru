@@ -68,7 +68,7 @@ PLATFORMS
 DEPENDENCIES
   cucumber (~> 3.1.2)
   httparty (~> 0.16.4)
-  rspec
+  rspec (~> 3.8.0)
   rubocop (~> 0.64.0)
 
 BUNDLED WITH

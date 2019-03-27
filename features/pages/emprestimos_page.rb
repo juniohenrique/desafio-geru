@@ -1,7 +1,7 @@
 # Classe para PageObject do endpoint de Emprestimos
 class Emprestimos
   include HTTParty
-  base_uri 'https://emprestimo-api.getsandbox.com/api/v1'
+  base_uri 'https://www.urlficticia.com.br/api/v1'
 
   def initialize(body)
     @options = { body: body }
