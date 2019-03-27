@@ -1,2 +1,2 @@
-require "httparty"
-require "rspec"
+require 'httparty'
+require 'rspec'

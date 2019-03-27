@@ -1,23 +1,23 @@
+# Classe para PageObject do endpoint de Emprestimos
 class Emprestimos
   include HTTParty
-  base_uri "https://emprestimo-api.getsandbox.com/api/v1"
+  base_uri 'https://emprestimo-api.getsandbox.com/api/v1'
 
   def initialize(body)
-    @options = {:body => body}
-    @options2 ={}
+    @options = { body: body }
+    @options2 = {}
   end
 
-  def postUser
-    @user = self.class.post("/token", @options)
+  def post_user
+    @user = self.class.post('/token', @options)
     @token = @user.parsed_response['Token']
   end
 
-  def postEmprestimo
-    @emprestimo = self.class.post("/emprestimos", headers: {"Content-Type" => "application/jon","Authorization" => "Bearer " + @token.to_s}, body: @options)
+  def post_emprestimo
+    @emprestimo = self.class.post('/emprestimos', headers: { 'Content-Type' => 'application/jon', 'Authorization' => 'Bearer ' + @token.to_s }, body: @options)
   end
 
-  def getEmprestimo(id)
-    self.class.get("/emprestimos/#{id}", @options2)
+  def get_emprestimo(id)
+    self.class.get("/emprestimos/#{id}", headers: { 'Content-Type' => 'application/jon', 'Authorization' => 'Bearer ' + @token.to_s }, body: @options2)
   end
-
 end
