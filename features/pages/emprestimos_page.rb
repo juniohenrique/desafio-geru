@@ -13,10 +13,10 @@ class Emprestimos
   end
 
   def postEmprestimo
-    @emprestimo = self.class.post("/emprestimos", headers: {"Authorization" => "Bearer " + @token.to_s}, body: @options)
+    @emprestimo = self.class.post("/emprestimos", headers: {"Content-Type" => "application/jon","Authorization" => "Bearer " + @token.to_s}, body: @options)
   end
 
-  def getEmprestimo (id)
+  def getEmprestimo(id)
     self.class.get("/emprestimos/#{id}", @options2)
   end
 

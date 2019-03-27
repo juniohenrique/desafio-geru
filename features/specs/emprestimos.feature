@@ -18,11 +18,10 @@
 
    Cenário: Criar empréstimo acima do valor permitido
      Quando envio todos os dados para o serviço de criação de empréstimo acima do permitido
-     Então o serviço retorna "Valor acima do permitido"
+     Então o serviço retorna "Valor negado"
 
 
    Cenário: Consultar empréstimo
      Dado que o client tem um empréstimo criado
-     E possue um token válido para se comunicar com o serviço
      Quando o client consultar o serviço de empréstimo informando o ID do empréstimo
      Então o serviço deve me retornar as informações do empréstimo criado

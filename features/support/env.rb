@@ -1,1 +1,2 @@
 require "httparty"
+require "rspec"

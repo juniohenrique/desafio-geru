@@ -19,28 +19,33 @@ Quando("envio todos os dados para o serviço de criação de empréstimo acima d
   }
 
   @responseFalho = Emprestimos.new(@emprestimoFalha)
-  @teste = @responseFalho.postEmprestimo
-  puts @teste
+  @negado = @responseFalho.postEmprestimo
+  
 end
 
-Então("o serviço retorna {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Então("o serviço retorna {string}") do |mensagem|
+  expect(@negado.parsed_response['mensagem']).to eq(mensagem)
 end
 
-Então("o serviço retorna o empréstimo") do |string|
-
+Então("o serviço retorna o empréstimo") do
+  expect(@responseSucesso.parsed_response['id']).to eq(123)
 end
 
 Dado("que o client tem um empréstimo criado") do
-  pending # Write code here that turns the phrase above into concrete actions
+  steps %Q{Quando envio todos os dados com o para o serviço de criação de empréstimo
+  }
+  @id = (@responseSucesso.parsed_response['id'])
+  puts @id
 end
 
 Quando("o client consultar o serviço de empréstimo informando o ID do empréstimo") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @result = @sucesso.getEmprestimo(@id)
+  puts @result
 end
 
-Então("o serviço deve me retornar as informações do empréstimo criado") do
-  pending # Write code here that turns the phrase above into concrete actions
+Então("o serviço deve me retornar as informações do empréstimo criado:") do
+  expect(@result.parsed_response[id-emprestimo]).to eq(id)
+  expect(@result.parsed_response[status]).to eq(status)  
 end
 
 Quando("envio todos os dados com o para o serviço de criação de empréstimo") do
@@ -51,5 +56,4 @@ Quando("envio todos os dados com o para o serviço de criação de empréstimo")
 
   @sucesso = Emprestimos.new(@emprestimoSucesso)
   @responseSucesso = @sucesso.postEmprestimo
-  puts @responseSucesso
 end
